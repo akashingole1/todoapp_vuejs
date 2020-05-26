@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-3">
     <button class="btn btn-primary mb-3" v-on:click="openForm">+</button>
     <form class="detail-box" v-show="isOpen">
       <div class="form-group">
@@ -15,7 +15,6 @@
         <button type="button" class="btn btn-danger mt-3" v-on:click="closeForm">Cancel</button>
       </div>
     </form>
-    {{ title }} {{ info }}
   </div>
 </template>
 

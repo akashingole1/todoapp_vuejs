@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Todo App</h1>
+    <h2 style="text-decoration: underline">Vue.js Todo App</h2>
     <TodoList v-bind:todos="todos" />
     <CreateTodo v-on:create-todo="createTodo" />
   </div>
