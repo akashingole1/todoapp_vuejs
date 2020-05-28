@@ -31,6 +31,7 @@ export default {
     completeTodo(todo) {
       let index = this.todos.indexOf(todo);
       this.todos[index]["done"] = true;
+      localStorage.setItem("todos", JSON.stringify(this.todos));
       swal("Good job!", "Todo Completed", "success");
     },
     deleteTodo(todo) {
@@ -43,11 +44,9 @@ export default {
         dangerMode: true
       }).then(res => {
         if (res) {
-          let todoArr = JSON.parse(localStorage.getItem("todos"));
-          let index = todoArr.indexOf(todo);
-          todoArr.splice(index, 1);
-          localStorage.setItem("todos", JSON.stringify(todoArr));
-          this.todos = todoArr;
+          let index = this.todos.indexOf(todo);
+          this.todos.splice(index, 1);
+          localStorage.setItem("todos", JSON.stringify(this.todos));
           swal("Success", "Todo deleted successfully", "success");
         }
       });
