@@ -19,7 +19,13 @@ import swal from "sweetalert";
 
 export default {
   app: "TodoList",
-  props: ["todos"],
+  data() {
+    return {
+      todos: localStorage.hasOwnProperty("todos")
+        ? JSON.parse(localStorage.getItem("todos"))
+        : []
+    };
+  },
   components: { Todo },
   methods: {
     completeTodo(todo) {
@@ -28,6 +34,7 @@ export default {
       swal("Good job!", "Todo Completed", "success");
     },
     deleteTodo(todo) {
+      console.log("del", todo);
       swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this file!",
@@ -36,8 +43,11 @@ export default {
         dangerMode: true
       }).then(res => {
         if (res) {
-          let index = this.todos.indexOf(todo);
-          this.todos.splice(index, 1);
+          let todoArr = JSON.parse(localStorage.getItem("todos"));
+          let index = todoArr.indexOf(todo);
+          todoArr.splice(index, 1);
+          localStorage.setItem("todos", JSON.stringify(todoArr));
+          this.todos = todoArr;
           swal("Success", "Todo deleted successfully", "success");
         }
       });

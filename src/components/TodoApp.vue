@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 style="text-decoration: underline">Vue.js Todo App</h2>
-    <TodoList v-bind:todos="todos" />
+    <TodoList :key="shouldUpdate" />
     <CreateTodo v-on:create-todo="createTodo" />
   </div>
 </template>
@@ -19,23 +19,17 @@ export default {
   },
   data() {
     return {
-      todos: [
-        {
-          title: "Brush",
-          info: "Brush teeth daily",
-          done: false
-        },
-        {
-          title: "Shower",
-          info: "Shower daily",
-          done: false
-        }
-      ]
+      shouldUpdate: false
     };
   },
   methods: {
     createTodo(newTodo) {
-      this.todos.push(newTodo);
+      let todoArr = localStorage.hasOwnProperty("todos")
+        ? JSON.parse(localStorage.getItem("todos"))
+        : [];
+      todoArr.push(newTodo);
+      this.shouldUpdate = !this.shouldUpdate;
+      localStorage.setItem("todos", JSON.stringify(todoArr));
     }
   }
 };

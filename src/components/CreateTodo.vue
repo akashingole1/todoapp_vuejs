@@ -41,7 +41,6 @@ export default {
       if (this.title != "" && this.info != "") {
         const title = this.title;
         const info = this.info;
-        console.log(title, info);
         this.$emit("create-todo", {
           title: title,
           info: info,
